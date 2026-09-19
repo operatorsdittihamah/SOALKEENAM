@@ -1,550 +1,1076 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galactic Math Quest - Penjumlahan 5 Angka</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flower Adjectives Quest - Desert Edition</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: radial-gradient(ellipse at bottom, #1e1b4b 0%, #09051d 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffffff;
-            overflow: hidden;
-            position: relative;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .stars-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #1a237e 0%, #283593 25%, #4a148c 60%, #880e4f 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3e2723;
+    overflow-x: hidden;
+    position: relative;
+}
 
-        .star {
-            position: absolute;
-            background-color: #fff;
-            border-radius: 50%;
-            animation: moveStar linear infinite;
-        }
+/* DEKORASI BACKGROUND TIMUR TENGAH / ISTANA ARAB */
+.garden-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
 
-        @keyframes moveStar {
-            from { transform: translateY(0); opacity: 1; }
-            to { transform: translateY(100vh); opacity: 0.2; }
-        }
+.sun {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff9c4 0%, #ffe082 50%, #ffb300 100%);
+    top: 5%;
+    right: 8%;
+    box-shadow: 0 0 50px rgba(255, 179, 0, 0.6);
+}
 
-        .nebula {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            z-index: 1;
-        }
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    width: 120px;
+    height: 30px;
+    border-radius: 30px;
+    opacity: 0.6;
+}
+.cloud::before, .cloud::after {
+    content: ""; position: absolute; background: rgba(255, 255, 255, 0.4); border-radius: 50%;
+}
+.cloud::before { width: 50px; height: 50px; left: 15px; top: -25px; }
+.cloud::after { width: 60px; height: 60px; right: 15px; top: -30px; }
+.cloud-1 { top: 8%; left: 6%; }
+.cloud-2 { top: 16%; left: 45%; transform: scale(0.7); }
 
-        .nebula-1 {
-            width: 350px;
-            height: 350px;
-            background: #6366f1;
-            top: 10%;
-            left: 15%;
-            animation: pulse 8s infinite alternate;
-        }
+/* SILUET ISTANA & LINGKUNGAN ARAB */
+.house-background {
+    position: absolute;
+    bottom: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 80px;
+    z-index: 2;
+    opacity: 0.95;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+}
 
-        .nebula-2 {
-            width: 400px;
-            height: 400px;
-            background: #a855f7;
-            bottom: 10%;
-            right: 15%;
-            animation: pulse 10s infinite alternate-reverse;
-        }
+.home-yard-layer {
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 42px;
+    z-index: 3;
+}
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.3; }
-            100% { transform: scale(1.3); opacity: 0.6; }
-        }
+.grass {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(0deg, #3e2723 0%, #5d4037 70%, rgba(93,64,55,0) 100%);
+    z-index: 3;
+}
 
-        .game-card {
-            position: relative;
-            z-index: 10;
-            background: rgba(30, 27, 75, 0.88);
-            backdrop-filter: blur(16px);
-            border: 2px solid rgba(168, 85, 247, 0.3);
-            box-shadow: 0 0 35px rgba(168, 85, 247, 0.25), inset 0 0 15px rgba(99, 102, 241, 0.2);
-            border-radius: 24px;
-            padding: 30px;
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-        }
+.flower-garden {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding: 0 10px;
+    font-size: 36px;
+    z-index: 4;
+}
 
-        .header-section {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px 20px;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.flower {
+    display: inline-block;
+    animation: flowerSway 3s ease-in-out infinite alternate;
+    transform-origin: bottom center;
+}
+.flower:nth-child(even) { animation-delay: 0.5s; animation-duration: 4s; }
+@keyframes flowerSway {
+    from { transform: rotate(-4deg); }
+    to { transform: rotate(4deg); }
+}
 
-        .avatar {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #a855f7, #6366f1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 0 15px #a855f7;
-            border: 2px solid #fff;
-        }
+/* ANIMASI HEWAN PELIHARAAN / UNTA & BURUNG */
+.walking-animal-wrapper {
+    position: fixed;
+    z-index: 100;
+    pointer-events: none;
+    display: none;
+}
+.walking-animal {
+    font-size: 110px;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+    display: inline-block;
+}
+.wing-flap { animation: flap 0.25s ease-in-out infinite alternate; }
+@keyframes flap {
+    0% { transform: scaleX(1) scaleY(1) rotate(0deg); }
+    100% { transform: scaleX(0.4) scaleY(1.1) rotate(12deg); }
+}
+.limb-walk { animation: walkLimb 0.35s ease-in-out infinite alternate; }
+@keyframes walkLimb {
+    0% { transform: translateY(0) rotate(-3deg); }
+    100% { transform: translateY(-10px) rotate(3deg); }
+}
+@keyframes moveLeftToRight { 0% { left: -160px; } 100% { left: 105vw; } }
+@keyframes moveRightToLeft { 0% { left: 105vw; transform: scaleX(-1); } 100% { left: -160px; transform: scaleX(-1); } }
+@keyframes moveTopToBottom { 0% { top: -160px; } 100% { top: 105vh; } }
 
-        .stats-group {
-            text-align: right;
-            font-family: 'Orbitron', sans-serif;
-        }
+.animate-left-right { display: block; animation: moveLeftToRight linear forwards; }
+.animate-right-left { display: block; animation: moveRightToLeft linear forwards; }
+.animate-top-bottom { display: block; animation: moveTopToBottom linear forwards; }
 
-        .stat-item {
-            font-size: 13px;
-            color: #c7d2fe;
-        }
+#celebrationContainer {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 99; overflow: hidden;
+}
+.reward-item {
+    position: absolute; top: -50px; animation: fall linear forwards;
+}
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+}
 
-        .stat-value {
-            color: #c084fc;
-            font-weight: bold;
-            font-size: 16px;
-            text-shadow: 0 0 8px rgba(192, 132, 252, 0.8);
-        }
+/* MAIN CARD CONTAINER - INTERIOR RUANGAN ISTANA ARAB */
+.game-card {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(135deg, #fffbf0 0%, #f7ebd0 100%);
+    border: 6px solid #d4af37;
+    outline: 3px solid #5d4037;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(212, 175, 55, 0.3);
+    border-radius: 28px;
+    padding: 25px;
+    width: 92%;
+    max-width: 660px;
+    text-align: center;
+    max-height: 94vh;
+    overflow-y: auto;
+    margin: 20px auto;
+}
 
-        .title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 20px;
-            letter-spacing: 2px;
-            background: linear-gradient(90deg, #c084fc, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
+/* DEKORASI GAMBAR GUNUNG PADANG PASIR DI ATAS KARTU */
+.game-card::before {
+    content: "🏜️  🏔️  🏜️";
+    display: block;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
 
-        .progress-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
-            color: #818cf8;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
+.title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    color: #8c6d13;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 #fff;
+}
 
-        .question-box {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(192, 132, 252, 0.3);
-            box-shadow: inset 0 0 15px rgba(192, 132, 252, 0.1);
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* BUTTONS */
+.btn {
+    width: 100%;
+    padding: 14px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.btn-start { background: linear-gradient(135deg, #d4af37, #b38728); color: white; box-shadow: 0 6px 16px rgba(179,135,40,0.4); text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+.btn-submit { background: linear-gradient(135deg, #2e7d32, #1b5e20); color: white; box-shadow: 0 6px 16px rgba(27,94,32,0.3); }
+.btn-download { background: linear-gradient(135deg, #0288d1, #01579b); color: white; box-shadow: 0 6px 16px rgba(2,136,209,0.3); }
+.btn-back { background: #ffb74d; color: #3e2723; padding: 8px 14px; font-size: 13px; width: auto; margin-bottom: 0; }
+.btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
 
-        .question {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 22px;
-            font-weight: bold;
-            color: #ffffff;
-            line-height: 1.5;
-            letter-spacing: 1px;
-        }
+/* SCREEN VISIBILITY */
+.screen { display: none; }
+.active-screen { display: block; }
 
-        .input-box, .select-box {
-            width: 100%;
-            padding: 14px;
-            font-size: 20px;
-            font-family: 'Orbitron', sans-serif;
-            text-align: center;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            outline: none;
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-        }
+/* KOSA KATA STYLES */
+.vocab-header {
+    background: rgba(255, 248, 225, 0.9);
+    padding: 15px;
+    border-radius: 18px;
+    border: 2px solid #e0c068;
+    margin-bottom: 15px;
+}
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+.vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+    text-align: left;
+    margin-top: 15px;
+}
+.vocab-card {
+    background: #ffffff;
+    border: 2px solid #e0c068;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.vocab-info { flex-grow: 1; }
+.vocab-word { font-weight: 700; color: #8c6d13; font-size: 15px; }
+.vocab-ipa { font-size: 12px; color: #757575; font-style: italic; }
+.vocab-meaning { font-size: 13px; color: #3e2723; margin-top: 2px; }
 
-        .select-box option {
-            background-color: #1e1b4b;
-            color: #fff;
-        }
+/* COLOR CODED TAGS UNTUK JENIS KATA */
+.vocab-tag { font-size: 10px; padding: 2px 6px; border-radius: 6px; display: inline-block; font-weight: 600; margin-left: 6px; }
+.tag-noun { background: #e3f2fd; color: #1565c0; }      
+.tag-verb { background: #fff3e0; color: #e65100; }      
+.tag-adjective { background: #e8f5e9; color: #2e7d32; } 
+.tag-adverb { background: #f3e5f5; color: #7b1fa2; }    
 
-        .input-box:focus, .select-box:focus {
-            border-color: #c084fc;
-            box-shadow: 0 0 15px rgba(192, 132, 252, 0.5);
-            background: rgba(255, 255, 255, 0.15);
-        }
+.audio-btn {
+    background: #d4af37;
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    flex-shrink: 0;
+}
+.audio-btn:hover { background: #b38728; transform: scale(1.1); }
 
-        .btn {
-            width: 100%;
-            padding: 14px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
-        }
+/* QUIZ STYLES */
+.header-section {
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(255, 248, 225, 0.95); padding: 10px 18px; border-radius: 18px;
+    margin-bottom: 15px; border: 2px solid #d4af37;
+}
+.avatar {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: linear-gradient(135deg, #d4af37, #aa7c11);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; box-shadow: 0 4px 10px rgba(170,124,17,0.4); border: 2px solid white;
+}
+.stats-group { text-align: right; font-family: 'Fredoka', sans-serif; }
+.stat-item { font-size: 12px; color: #8c6d13; font-weight: 600; }
+.stat-value { color: #4e342e; font-weight: 700; font-size: 16px; }
 
-        .btn-submit {
-            background: linear-gradient(135deg, #a855f7, #6366f1);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
-        }
+/* KOTAK SOAL RUANGAN INDAH ARAB */
+.question-box {
+    background: linear-gradient(180deg, #ffffff 0%, #fffbf0 100%);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 18px;
+    border: 3px double #d4af37;
+    box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.15), 0 8px 16px rgba(0,0,0,0.06);
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.question-box::before {
+    content: "✨";
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    font-size: 14px;
+}
+.question-box::after {
+    content: "✨";
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 14px;
+}
 
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.8);
-        }
+/* STYLES GAMBAR SOAL */
+.question-img {
+    max-width: 100%; 
+    max-height: 180px; 
+    border-radius: 12px;
+    margin-bottom: 12px; 
+    border: 3px solid #d4af37; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+    object-fit: cover;
+}
+.question { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: #3e2723; line-height: 1.4; }
 
-        .btn-start {
-            background: linear-gradient(135deg, #34d399, #6366f1);
-            color: #000;
-            box-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
-        }
+/* PILIHAN GANDA */
+.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
+.option-btn {
+    background: linear-gradient(180deg, #ffffff 0%, #fffbf0 100%);
+    border: 2px solid #d4af37;
+    border-radius: 14px;
+    padding: 14px 10px;
+    color: #5d4037;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.option-btn:hover { background: #f7ebd0; border-color: #b38728; transform: translateY(-2px); }
+.option-btn.selected {
+    background: linear-gradient(135deg, #d4af37, #aa7c11);
+    color: white;
+    border-color: #8c6d13;
+    box-shadow: 0 6px 14px rgba(170,124,17,0.4);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
 
-        .feedback {
-            margin-top: 15px;
-            font-weight: 600;
-            min-height: 24px;
-            font-size: 15px;
-        }
+.select-box {
+    width: 100%; padding: 14px; font-size: 16px; font-family: 'Fredoka', sans-serif;
+    text-align: center; border: 2px solid #d4af37; border-radius: 14px;
+    background: white; color: #3e2723; outline: none; margin-bottom: 15px;
+}
 
-        .feedback.correct {
-            color: #34d399;
-            text-shadow: 0 0 10px #34d399;
-        }
+.feedback { margin-top: 10px; font-weight: 700; min-height: 24px; font-size: 15px; font-family: 'Fredoka', sans-serif; }
+.feedback.correct { color: #2e7d32; }
+.feedback.wrong { color: #c62828; }
 
-        .feedback.wrong {
-            color: #f43f5e;
-            text-shadow: 0 0 10px #f43f5e;
-        }
+/* PERBAIKAN STYLES SOAL MENJODOHKAN (DIPERBESAR & ANTI TERPOTONG) */
+.matching-container { 
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+}
+.matching-row { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    align-items: stretch; 
+}
+.matching-indonesia { 
+    background: #fffbf0; 
+    border: 2px solid #d4af37; 
+    border-radius: 14px; 
+    padding: 12px 14px; 
+    font-family: 'Fredoka', sans-serif; 
+    font-weight: 600; 
+    color: #5d4037; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    font-size: 14px;
+    line-height: 1.3;
+}
+.matching-select { 
+    width: 100%; 
+    padding: 12px; 
+    border: 2px solid #d4af37; 
+    border-radius: 14px; 
+    background: white; 
+    color: #3e2723; 
+    font-family: 'Fredoka', sans-serif; 
+    font-size: 14px; 
+    font-weight: 600; 
+    outline: none; 
+    cursor: pointer; 
+    white-space: normal; 
+    word-wrap: break-word; 
+    box-shadow: 0 3px 6px rgba(0,0,0,0.05); 
+    height: 100%;
+}
+.matching-select option { 
+    padding: 10px; 
+    font-size: 14px; 
+    font-family: 'Fredoka', sans-serif; 
+}
 
-        .screen {
-            display: none;
-        }
+/* RESPONSIF HP: MENJADI 1 KOLOM VERTIKAL UNTUK RUANG LEBIH LUAS */
+@media screen and (max-width: 580px) {
+    .matching-row { 
+        grid-template-columns: 1fr; 
+        gap: 6px; 
+        background: rgba(212, 175, 55, 0.1); 
+        padding: 10px; 
+        border-radius: 16px; 
+        border: 1px solid #e0c068; 
+    }
+    .matching-select { 
+        padding: 12px 8px; 
+        font-size: 13.5px; 
+    }
+}
 
-        .active-screen {
-            display: block;
-        }
+.final-score { font-family: 'Fredoka', sans-serif; font-size: 55px; color: #8c6d13; text-shadow: 2px 2px 0 #fff; margin: 10px 0; }
 
-        .final-score {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 50px;
-            color: #c084fc;
-            text-shadow: 0 0 20px #c084fc;
-            margin: 15px 0;
-        }
+/* CETAK / PRINT STYLES */
+@media print {
+    body { background: white !important; color: black !important; }
+    .garden-background, .walking-animal-wrapper, #celebrationContainer, .btn, .audio-btn, .btn-back { display: none !important; }
+    .game-card { border: none !important; box-shadow: none !important; max-width: 100% !important; width: 100% !important; max-height: none !important; overflow: visible !important; }
+    .screen { display: block !important; }
+    #loginScreen, #quizScreen, #resultScreen { display: none !important; }
+    #vocabScreen { display: block !important; }
+    
+    .print-section { display: block !important; page-break-before: always; }
+    .vocab-grid { grid-template-columns: 1fr 1fr !important; }
+    
+    .print-options-list {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 5px;
+    }
+    .print-options-list li {
+        margin-bottom: 4px;
+        font-weight: normal;
+    }
+}
 
-        .result-details {
-            font-size: 15px;
-            color: #c7d2fe;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .saving-status {
-            font-size: 14px;
-            color: #34d399;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-10px); }
-            40%, 80% { transform: translateX(10px); }
-        }
-
-        .shake {
-            animation: shake 0.4s ease-in-out;
-        }
-    </style>
+.print-section { display: none; }
+</style>
 </head>
+
 <body>
 
-    <div class="stars-container" id="starsContainer"></div>
-    <div class="nebula nebula-1"></div>
-    <div class="nebula nebula-2"></div>
+<!-- CONTAINER HEWAN MELEWATI DEPAN SOAL -->
+<div id="animalWrapper" class="walking-animal-wrapper">
+    <div id="walkingAnimal" class="walking-animal">🐪</div>
+</div>
 
-    <div class="game-card" id="gameCard">
-        
-        <!-- SCREEN 1: LOGIN -->
-        <div id="loginScreen" class="screen active-screen">
-            <div class="avatar" style="margin: 0 auto 15px auto; width: 70px; height: 70px; font-size: 36px;">🔢</div>
-            <h1 class="title">PENJUMLAHAN 5 ANGKA</h1>
-            <p style="color: #c7d2fe; margin-bottom: 20px; font-size: 14px;">Pilih namamu untuk memulai tantangan!</p>
-            
-            <form id="loginForm" onsubmit="startGame(event)">
-                <select id="studentSelect" class="select-box" required>
-                    <option value="">-- Memuat Nama Siswa... --</option>
-                </select>
-                <button type="submit" class="btn btn-start" id="startBtn" disabled>Mulai Misi 🚀</button>
-            </form>
-            <div id="loginFeedback" style="margin-top: 10px; font-size: 13px; color: #f43f5e;"></div>
-        </div>
-
-        <!-- SCREEN 2: GAMEPLAY -->
-        <div id="quizScreen" class="screen">
-            <div class="header-section">
-                <div class="avatar" id="avatarIcon">🚀</div>
-                <div class="stats-group">
-                    <div class="stat-item">SISWA: <span class="stat-value" id="displayName" style="font-size:12px;">-</span></div>
-                    <div class="stat-item">SKOR: <span class="stat-value" id="score">0</span> / 100</div>
-                </div>
-            </div>
-
-            <div class="progress-text" id="progressText">SOAL 1 DARI 20</div>
-
-            <div class="question-box">
-                <div class="question" id="questionText">Memuat soal...</div>
-            </div>
-
-            <form id="quizForm" onsubmit="checkAnswer(event)">
-                <input 
-                    type="number" 
-                    id="answerInput" 
-                    class="input-box" 
-                    placeholder="Hasil Penjumlahan..." 
-                    autocomplete="off" 
-                    required 
-                />
-                <button type="submit" class="btn btn-submit" id="submitBtn">Kirim Jawaban 🛸</button>
-            </form>
-
-            <div class="feedback" id="feedbackText"></div>
-        </div>
-
-        <!-- SCREEN 3: HASIL -->
-        <div id="resultScreen" class="screen">
-            <div class="avatar" id="finalAvatar" style="margin: 0 auto 15px auto; width: 80px; height: 80px; font-size: 45px;">👑</div>
-            <h1 class="title">MISI SELESAI!</h1>
-            <p style="color: #c7d2fe;">NILAI AKHIR KAMU:</p>
-            <div class="final-score" id="finalScore">0</div>
-            
-            <div class="result-details" id="resultDetails"></div>
-            <div class="saving-status" id="savingStatus">💾 Menyimpan skor ke Google Sheets...</div>
-        </div>
-
+<!-- BACKGROUND ISTANA ARAB / TIMUR TENGAH -->
+<div class="garden-background">
+    <div class="sun"></div>
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    
+    <!-- Siluet Istana Arab -->
+    <div class="house-background">
+        <span>🕌</span><span>🏰</span><span>🕌</span>
+    </div>
+    
+    <!-- Pohon Kurma & Lampu Lentera -->
+    <div class="home-yard-layer">
+        <span>🌴</span><span>🪔</span><span>🌴</span><span>🪔</span><span>🌴</span>
     </div>
 
-    <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxAaiLm97xRUO9Ff3ISDBwxSEiB_G_6TcgQswjMkeEJ9ZY963twDFUS0hp-8SwiJlaJDQ/exec";
+    <!-- Halaman Istana -->
+    <div class="grass"></div>
 
-        const TOTAL_QUESTIONS = 20;
-        const POINTS_PER_QUESTION = 5;
+    <!-- Taman Bunga & Hiasan Istana -->
+    <div class="flower-garden">
+        <span class="flower">🌸</span><span class="flower">🌹</span><span class="flower">🪔</span>
+        <span class="flower">🌷</span><span class="flower">🌻</span><span class="flower">🪔</span>
+        <span class="flower">🌸</span><span class="flower">🌹</span><span class="flower">🪔</span>
+    </div>
+</div>
 
-        let selectedStudentName = "";
-        let currentQuestion = 1;
-        let correctAnswer = 0;
-        let score = 0;
-        let correctCount = 0;
+<div id="celebrationContainer"></div>
 
-        const avatars = ["🚀", "🔢", "🛸", "👾", "🤖", "🌟", "👑"];
+<div class="game-card" id="gameCard">
 
-        function createStars() {
-            const container = document.getElementById('starsContainer');
-            for (let i = 0; i < 80; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                const size = Math.random() * 3 + 1;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDuration = `${Math.random() * 5 + 3}s`;
-                container.appendChild(star);
-            }
-        }
-
-        async function fetchStudentNames() {
-            const selectElem = document.getElementById('studentSelect');
-            const startBtn = document.getElementById('startBtn');
-            const feedback = document.getElementById('loginFeedback');
-
-            try {
-                const response = await fetch(GOOGLE_SCRIPT_URL);
-                const data = await response.json();
-
-                if (data.names && data.names.length > 0) {
-                    selectElem.innerHTML = '<option value="">-- Pilih Namamu --</option>';
-                    data.names.forEach(name => {
-                        const opt = document.createElement('option');
-                        opt.value = name;
-                        opt.textContent = name;
-                        selectElem.appendChild(opt);
-                    });
-                    startBtn.disabled = false;
-                } else {
-                    selectElem.innerHTML = '<option value="">-- Tidak Ada Nama Ditemukan --</option>';
-                    feedback.innerText = "Daftar nama di Google Sheets masih kosong!";
-                }
-            } catch (err) {
-                console.error(err);
-                selectElem.innerHTML = '<option value="">-- Gagal Memuat --</option>';
-                feedback.innerText = "Gagal terhubung ke Google Sheets.";
-            }
-        }
-
-        function startGame(event) {
-            event.preventDefault();
-            const selectElem = document.getElementById('studentSelect');
-            selectedStudentName = selectElem.value;
-
-            if (!selectedStudentName) return;
-
-            document.getElementById('displayName').innerText = selectedStudentName;
-            document.getElementById('loginScreen').classList.remove('active-screen');
-            document.getElementById('quizScreen').classList.add('active-screen');
-
-            generateQuestion();
-        }
-
-        // Generator Soal Penjumlahan 5 Angka Acak
-        function generateQuestion() {
-            let nums = [];
-            for (let i = 0; i < 5; i++) {
-                // Menghasilkan angka acak antara 5 sampai 35
-                nums.push(Math.floor(Math.random() * 31) + 5);
-            }
-
-            correctAnswer = nums.reduce((acc, curr) => acc + curr, 0);
-
-            const questionStr = `${nums[0]} + ${nums[1]} + ${nums[2]} + ${nums[3]} + ${nums[4]}`;
-
-            document.getElementById('progressText').innerText = `SOAL ${currentQuestion} DARI ${TOTAL_QUESTIONS}`;
-            document.getElementById('questionText').innerText = questionStr;
+    <!-- 1. HALAMAN KOSA-KATA (VOCABULARY SCREEN) -->
+    <div id="vocabScreen" class="screen active-screen">
+        <div class="vocab-header">
+            <h1 class="title">SILAHKAN HAFALKAN TERLEBIH DAHULU KOSA-KATA BERIKUT INI</h1>
+            <p style="font-size: 13px; color: #8c6d13; margin-bottom: 10px;">Pelajari kata benda (Noun), kata kerja (Verb), kata keterangan (Adverb), & kata sifat (Adjective) sebelum bermain!</p>
             
-            const inputField = document.getElementById('answerInput');
-            inputField.value = '';
-            inputField.disabled = false;
-            inputField.focus();
+            <div class="action-buttons">
+                <button type="button" class="btn btn-start" onclick="showLoginScreen()">LANJUT KE SOAL ATAU GAME 🚀</button>
+                <button type="button" class="btn btn-download" onclick="window.print()">📥 CETAK / DOWNLOAD PDF (KOSA KATA & SOAL)</button>
+            </div>
+        </div>
 
-            document.getElementById('submitBtn').disabled = false;
-        }
+        <div class="vocab-grid" id="vocabGrid">
+            <!-- Diisi otomatis oleh JavaScript -->
+        </div>
+    </div>
 
-        function checkAnswer(event) {
-            event.preventDefault();
+    <!-- 2. LOGIN SCREEN -->
+    <div id="loginScreen" class="screen">
+        <button type="button" class="btn btn-back" onclick="showVocabScreen()">📖 Lihat Kosa Kata</button>
+        <div class="avatar" style="margin:15px auto 15px auto; width:75px; height:75px; font-size:40px;">📚</div>
+        <h1 class="title">FLOWER ADJECTIVES QUEST</h1>
+        <p style="color:#8c6d13; margin-bottom:20px; font-size:14px; font-weight:600;">Pilih namamu dan mulai petualangan!</p>
+        
+        <form id="loginForm" onsubmit="startGame(event)">
+            <select id="studentSelect" class="select-box" required>
+                <option value="">-- Memuat Nama Siswa... --</option>
+            </select>
+            <button type="submit" class="btn btn-start" id="startBtn" disabled>Mulai Bermain 🌸</button>
+        </form>
+        <div id="loginFeedback" style="margin-top:10px; font-size:13px; color:#c62828;"></div>
+    </div>
 
-            const inputField = document.getElementById('answerInput');
-            const submitBtn = document.getElementById('submitBtn');
-            const userInputValue = inputField.value.trim();
-            const feedback = document.getElementById('feedbackText');
-            const gameCard = document.getElementById('gameCard');
+    <!-- 3. QUIZ SCREEN -->
+    <div id="quizScreen" class="screen">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <button type="button" class="btn btn-back" onclick="showVocabScreen()">📖 Lihat Kosa Kata</button>
+            <div class="progress-text" id="progressText" style="margin-bottom:0; font-weight:bold; color:#8c6d13;">SOAL 1 DARI 20</div>
+        </div>
 
-            if (userInputValue === "") return;
+        <div class="header-section">
+            <div class="avatar" id="avatarIcon">📚</div>
+            <div class="stats-group">
+                <div class="stat-item">SISWA: <span class="stat-value" id="displayName" style="font-size:13px;">-</span></div>
+                <div class="stat-item">SKOR: <span class="stat-value" id="score">0</span> / 100</div>
+            </div>
+        </div>
+        
+        <div class="question-box">
+            <!-- Tempat Menampilkan Gambar Soal -->
+            <img id="questionImage" class="question-img" src="" alt="Gambar Soal" style="display:none;">
+            <div class="question" id="questionText">Memuat Soal...</div>
+        </div>
 
-            inputField.disabled = true;
-            submitBtn.disabled = true;
+        <form id="quizForm" onsubmit="checkAnswer(event)">
+            <div class="options-grid" id="optionsContainer"></div>
+            <button type="submit" class="btn btn-submit" id="submitBtn" disabled>Kirim Jawaban 🌷</button>
+        </form>
+        <div class="feedback" id="feedbackText"></div>
+    </div>
 
-            const userAnswer = parseInt(userInputValue);
+    <!-- 4. RESULT SCREEN -->
+    <div id="resultScreen" class="screen">
+        <div class="avatar" id="finalAvatar" style="margin:0 auto 15px auto; width:80px; height:80px; font-size:45px;">🏆</div>
+        <h1 class="title">MISI SELESAI!</h1>
+        <p style="color:#8c6d13; font-weight:600;">NILAI AKHIR KAMU:</p>
+        <div class="final-score" id="finalScore">0</div>
+        <div class="result-details" id="resultDetails"></div>
+        <div class="saving-status" id="savingStatus">💾 Menyimpan skor</div>
+        <button type="button" class="btn btn-start" onclick="showVocabScreen()" style="margin-top: 15px;">Kembali ke Halaman Utama 🏠</button>
+    </div>
 
-            if (userAnswer === correctAnswer) {
-                score += POINTS_PER_QUESTION;
-                correctCount += 1;
-                feedback.innerText = "✨ Jawaban Tepat Sekali!";
-                feedback.className = "feedback correct";
-            } else {
-                feedback.innerText = `💥 Salah! Jawaban benar: ${correctAnswer}`;
-                feedback.className = "feedback wrong";
+    <!-- PRINT SECTION -->
+    <div class="print-section" id="printSection">
+        <h2 style="text-align: center; margin-top: 30px; margin-bottom: 20px; color: #33691e;">LEMBAR SOAL LATIHAN</h2>
+        <div id="printQuestionsList"></div>
+    </div>
 
-                gameCard.classList.add('shake');
-                setTimeout(() => gameCard.classList.remove('shake'), 400);
-            }
+</div>
 
-            document.getElementById('score').innerText = score;
-            updateAvatar();
+<script>
+// SCRIPT GOOGLE SHEETS
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxAaiLm97xRUO9Ff3ISDBwxSEiB_G_6TcgQswjMkeEJ9ZY963twDFUS0hp-8SwiJlaJDQ/exec";
+const TOTAL_QUESTIONS = 20;
+const POINTS_PER_QUESTION = 5;
 
+// DATABANK KOSA KATA LENGKAP
+const vocabularyList = [
+    { word: "Wake up", ipa: "/weɪk ʌp/", meaning: "Bangun tidur", type: "Verb" },
+    { word: "Get up", ipa: "/ɡet ʌp/", meaning: "Bangun dari tempat tidur", type: "Verb" },
+    { word: "Brush my teeth", ipa: "/brʌʃ maɪ tiːθ/", meaning: "Menyikat gigi", type: "Verb" },
+    { word: "Take a shower", ipa: "/teɪk ə ˈʃaʊ.ər/", meaning: "Mandi", type: "Verb" },
+    { word: "Get dressed", ipa: "/ɡet drest/", meaning: "Berpakaian", type: "Verb" },
+    { word: "Have breakfast", ipa: "/hæv ˈbrek.fəst/", meaning: "Sarapan", type: "Verb" },
+    { word: "Go to school", ipa: "/ɡoʊ tə skuːl/", meaning: "Pergi ke sekolah", type: "Verb" },
+    { word: "Study", ipa: "/ˈstʌd.i/", meaning: "Belajar", type: "Verb" },
+    { word: "Read", ipa: "/riːd/", meaning: "Membaca", type: "Verb" },
+    { word: "Write", ipa: "/raɪt/", meaning: "Menulis", type: "Verb" },
+    { word: "Play", ipa: "/pleɪ/", meaning: "Bermain", type: "Verb" },
+    { word: "Pray", ipa: "/preɪ/", meaning: "Berdoa / Salat", type: "Verb" },
+    { word: "Have lunch", ipa: "/hæv lʌntʃ/", meaning: "Makan siang", type: "Verb" },
+    { word: "Go home", ipa: "/ɡoʊ hoʊm/", meaning: "Pulang", type: "Verb" },
+    { word: "Do homework", ipa: "/duː ˈhoʊm.wɝːk/", meaning: "Mengerjakan pekerjaan rumah", type: "Verb" },
+    { word: "Help my parents", ipa: "/help maɪ ˈper.ənts/", meaning: "Membantu orang tua", type: "Verb" },
+    { word: "Clean my room", ipa: "/kliːn maɪ ruːm/", meaning: "Membersihkan kamar", type: "Verb" },
+    { word: "Watch TV", ipa: "/wɑːtʃ ˌtiːˈviː/", meaning: "Menonton TV", type: "Verb" },
+    { word: "Go to bed", ipa: "/ɡoʊ tə bed/", meaning: "Pergi tidur / naik ke tempat tidur", type: "Verb" },
+    { word: "Sleep", ipa: "/sliːp/", meaning: "Tidur", type: "Verb" },
+    { word: "Breakfast", ipa: "/ˈbrek.fəst/", meaning: "Sarapan", type: "Noun" },
+    { word: "Lunch", ipa: "/lʌntʃ/", meaning: "Makan siang", type: "Noun" },
+    { word: "Homework", ipa: "/ˈhoʊm.wɝːk/", meaning: "Pekerjaan rumah", type: "Noun" },
+    { word: "School", ipa: "/skuːl/", meaning: "Sekolah", type: "Noun" },
+    { word: "Room", ipa: "/ruːm/", meaning: "Kamar / Ruangan", type: "Noun" },
+    { word: "Toothbrush", ipa: "/ˈtuːθ.brʌʃ/", meaning: "Sikat gigi", type: "Noun" },
+    { word: "Uniform", ipa: "/ˈjuː.nə.fɔːrm/", meaning: "Seragam", type: "Noun" },
+    { word: "Bed", ipa: "/bed/", meaning: "Tempat tidur", type: "Noun" },
+    { word: "Every morning", ipa: "/ˈev.ri ˈmɔːr.nɪŋ/", meaning: "Setiap pagi", type: "Adverb" },
+    { word: "Every day", ipa: "/ˈev.ri deɪ/", meaning: "Setiap hari", type: "Adverb" },
+    { word: "In the afternoon", ipa: "/ɪn ði ˌæf.tɚˈnuːn/", meaning: "Pada sore / siang hari", type: "Adverb" },
+    { word: "At night", ipa: "/æt naɪt/", meaning: "Pada malam hari", type: "Adverb" },
+    { word: "Early", ipa: "/ˈɝː.li/", meaning: "Lebih awal / pagi-pagi", type: "Adverb" },
+    { word: "Usually", ipa: "/ˈjuː.ʒu.ə.li/", meaning: "Biasanya", type: "Adverb" }
+];
+
+const questionBank = [
+    { type: "multiple", image: "bangun.jpg", text: "I _____ at 5 o'clock every morning.", options: ["Wake up", "Go home", "Have lunch", "Sleep"], answer: "Wake up" },
+    { type: "multiple", image: "get up.png", text: "After I wake up, I _____ from my bed.", options: ["Get up", "Watch TV", "Go to bed", "Have lunch"], answer: "Get up" },
+    { type: "multiple", image: "brush.jpg", text: "I use a toothbrush to _____.", options: ["Study", "Brush my teeth", "Play", "Sleep"], answer: "Brush my teeth" },
+    { type: "multiple", image: "SHOWER.jpg", text: "Before school, I usually _____.", options: ["Take a shower", "Go home", "Do homework", "Go to bed"], answer: "Take a shower" },
+    { type: "multiple", image: "seragam.jpg", text: "I wear my school _____ before going to school.", options: ["Bed", "Uniform", "Room", "Lunch"], answer: "Uniform" },
+    { type: "multiple", image: "SARAPAN3.png", text: "The first meal in the morning is _____.", options: ["Lunch", "Homework", "Breakfast", "School"], answer: "Breakfast" },
+    { type: "multiple", image: "belajar.jpg", text: "Students _____ at school.", options: ["Study", "Sleep", "Go to bed", "Go home"], answer: "Study" },
+    { type: "multiple", image: "read.jpg", text: "I _____ books to learn new things.", options: ["Read", "Sleep", "Play", "Get dressed"], answer: "Read" },
+    { type: "multiple", image: "pulang.jpg", text: "After school, I usually _____.", options: ["Go home", "Wake up", "Have breakfast", "Take a shower"], answer: "Go home" },
+    { type: "multiple", image: "homework.jpg", text: "In the evening, I _____ before going to bed.", options: ["Do homework", "Go to school", "Have breakfast", "Wake up"], answer: "Do homework" },
+
+    { type: "matching", image: "m1.png", text: "Jodohkan kegiatan sehari-hari dengan Bahasa Inggris yang tepat!", distractor: "Sleep", pairs: [{ indonesia: "Makan siang", english: "Have lunch" }, { indonesia: "Pergi ke sekolah", english: "Go to school" }] },
+    { type: "matching", image: "M2.png", text: "Jodohkan kegiatan berikut dengan Bahasa Inggris yang tepat!", distractor: "Read", pairs: [{ indonesia: "Berdoa / Salat", english: "Pray" }, { indonesia: "Menulis", english: "Write" }] },
+    { type: "matching", image: "clean.jpg", text: "Jodohkan kegiatan berikut dengan Bahasa Inggris yang tepat!", distractor: "Play", pairs: [{ indonesia: "Membersihkan kamar", english: "Clean my room" }, { indonesia: "Membantu orang tua", english: "Help my parents" }] },
+    { type: "matching", image: "M4.png", text: "Jodohkan kegiatan berikut dengan Bahasa Inggris yang tepat!", distractor: "Get dressed", pairs: [{ indonesia: "Mandi", english: "Take a shower" }, { indonesia: "Bangun tidur", english: "Wake up" }] },
+    { type: "matching", image: "M5.png", text: "Jodohkan kata berikut dengan artinya!", distractor: "Lunch", pairs: [{ indonesia: "Pekerjaan rumah", english: "Homework" }, { indonesia: "Seragam", english: "Uniform" }] },
+    { type: "matching", image: "M6.png", text: "Jodohkan kegiatan berikut dengan Bahasa Inggris yang tepat!", distractor: "Watch TV", pairs: [{ indonesia: "Tidur", english: "Sleep" }, { indonesia: "Pergi tidur", english: "Go to bed" }] },
+    { type: "matching", image: "evryday.jpg", text: "Jodohkan keterangan waktu berikut dengan Bahasa Inggris yang tepat!", distractor: "At night", pairs: [{ indonesia: "Setiap hari", english: "Every day" }, { indonesia: "Setiap pagi", english: "Every morning" }] },
+    { type: "matching", image: "biasanya.jpg", text: "Jodohkan keterangan waktu berikut dengan Bahasa Inggris yang tepat!", distractor: "Early", pairs: [{ indonesia: "Biasanya", english: "Usually" }, { indonesia: "Pada malam hari", english: "At night" }] },
+    { type: "matching", image: "M7.png", text: "Jodohkan kegiatan berikut dengan Bahasa Inggris yang tepat!", distractor: "Study", pairs: [{ indonesia: "Sarapan", english: "Have breakfast" }, { indonesia: "Bermain", english: "Play" }] },
+    { type: "matching", image: "M8.png", text: "Jodohkan kegiatan berikut dengan Bahasa Inggris yang tepat!", distractor: "Take a shower", pairs: [{ indonesia: "Menonton TV", english: "Watch TV" }, { indonesia: "Mengerjakan pekerjaan rumah", english: "Do homework" }] }
+];
+
+let selectedStudentName = "";
+let currentQuestion = 1;
+let selectedOption = null;
+let score = 0;
+let correctCount = 0;
+const avatars = ["📚", "✏️", "🎒", "🏫", "⭐", "🌟", "🏆"];
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playSound(type) {
+    if (type === 'correct') {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        let notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, index) => {
             setTimeout(() => {
-                feedback.innerText = "";
-                if (currentQuestion < TOTAL_QUESTIONS) {
-                    currentQuestion++;
-                    generateQuestion();
-                } else {
-                    showFinalResult();
-                }
-            }, 1200);
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.4);
+            }, index * 80);
+        });
+    } else {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.3);
+    }
+}
+
+function speakWord(word) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const cleanWord = word.split('/')[0].trim();
+        const utterance = new SpeechSynthesisUtterance(cleanWord);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert("Browser Anda tidak mendukung fitur suara pengucapan.");
+    }
+}
+
+function renderVocabulary() {
+    const vocabGrid = document.getElementById('vocabGrid');
+    vocabGrid.innerHTML = '';
+    vocabularyList.sort((a,b) => a.word.localeCompare(b.word));
+
+    vocabularyList.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'vocab-card';
+        
+        let tagClass = 'tag-adjective';
+        if (item.type === 'Noun') tagClass = 'tag-noun';
+        else if (item.type === 'Verb') tagClass = 'tag-verb';
+        else if (item.type === 'Adverb') tagClass = 'tag-adverb';
+
+        card.innerHTML = `
+            <div class="vocab-info">
+                <div>
+                    <span class="vocab-word">${item.word}</span>
+                    <span class="vocab-tag ${tagClass}">${item.type}</span>
+                </div>
+                <div class="vocab-ipa">${item.ipa}</div>
+                <div class="vocab-meaning">${item.meaning}</div>
+            </div>
+            <button class="audio-btn" onclick="speakWord('${item.word}')" title="Dengarkan Suara">🔊</button>
+        `;
+        vocabGrid.appendChild(card);
+    });
+}
+
+function renderPrintQuestions() {
+    const printList = document.getElementById('printQuestionsList');
+    printList.innerHTML = '';
+    const labels = ['A', 'B', 'C', 'D'];
+
+    questionBank.forEach((q, index) => {
+        const item = document.createElement('div');
+        item.style.marginBottom = "15px";
+        item.style.textAlign = "left";
+
+        let optionsHTML = '';
+        if (q.type === 'multiple') {
+            optionsHTML = `<ul class="print-options-list">`;
+            q.options.forEach((opt, optIndex) => {
+                optionsHTML += `<li><b>${labels[optIndex]}.</b> ${opt}</li>`;
+            });
+            optionsHTML += `</ul>`;
+        } else if (q.type === 'matching') {
+            optionsHTML = `<div style="margin-top:5px; margin-left:15px;">`;
+            q.pairs.forEach(p => {
+                optionsHTML += `<div>• ${p.indonesia} = ......... (${p.english})</div>`;
+            });
+            optionsHTML += `</div>`;
         }
 
-        function updateAvatar() {
-            const avatarElem = document.getElementById('avatarIcon');
-            if (correctCount < 4) avatarElem.innerText = avatars[0];
-            else if (correctCount < 8) avatarElem.innerText = avatars[1];
-            else if (correctCount < 12) avatarElem.innerText = avatars[2];
-            else if (correctCount < 16) avatarElem.innerText = avatars[3];
-            else if (correctCount < 19) avatarElem.innerText = avatars[4];
-            else avatarElem.innerText = avatars[6];
+        item.innerHTML = `
+            <div style="font-weight: bold;">${index + 1}. ${q.text}</div>
+            ${optionsHTML}
+        `;
+        printList.appendChild(item);
+    });
+}
+
+function showVocabScreen() {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active-screen'));
+    document.getElementById('vocabScreen').classList.add('active-screen');
+}
+
+function showLoginScreen() {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active-screen'));
+    document.getElementById('loginScreen').classList.add('active-screen');
+}
+
+function triggerCelebration() {
+    const container = document.getElementById('celebrationContainer');
+    const items = ['📚', '✏️', '🎒', '⭐', '✨', '📝', '🏫', '🏆'];
+    for (let i = 0; i < 30; i++) {
+        const item = document.createElement('div');
+        item.className = 'reward-item';
+        item.innerText = items[Math.floor(Math.random() * items.length)];
+        item.style.left = Math.random() * 100 + '%';
+        item.style.fontSize = (Math.random() * 20 + 20) + 'px';
+        item.style.animationDuration = (Math.random() * 1.5 + 1) + 's';
+        item.style.animationDelay = (Math.random() * 0.3) + 's';
+        container.appendChild(item);
+        setTimeout(() => item.remove(), 2500);
+    }
+}
+
+async function fetchStudentNames() {
+    const selectElem = document.getElementById('studentSelect');
+    const startBtn = document.getElementById('startBtn');
+    const feedback = document.getElementById('loginFeedback');
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL);
+        const data = await response.json();
+        if (data.names && data.names.length > 0) {
+            selectElem.innerHTML = '<option value="">-- Pilih Namamu --</option>';
+            data.names.forEach(name => {
+                const opt = document.createElement('option');
+                opt.value = name; opt.textContent = name;
+                selectElem.appendChild(opt);
+            });
+            startBtn.disabled = false;
+        } else {
+            selectElem.innerHTML = '<option value="">-- Tidak Ada Nama Ditemukan --</option>';
+            feedback.innerText = "Daftar nama di Google Sheets masih kosong!";
         }
+    } catch (err) {
+        console.error(err);
+        selectElem.innerHTML = '<option value="">-- Gagal Memuat Nama --</option>';
+        feedback.innerText = "Gagal terhubung ke Google Sheets.";
+    }
+}
 
-        async function showFinalResult() {
-            document.getElementById('quizScreen').classList.remove('active-screen');
-            document.getElementById('resultScreen').classList.add('active-screen');
+function startGame(event) {
+    event.preventDefault();
+    selectedStudentName = document.getElementById('studentSelect').value;
+    if (!selectedStudentName) return;
+    document.getElementById('displayName').innerText = selectedStudentName;
+    document.getElementById('loginScreen').classList.remove('active-screen');
+    document.getElementById('quizScreen').classList.add('active-screen');
+    generateQuestion();
+}
 
-            document.getElementById('finalScore').innerText = score;
-            document.getElementById('finalAvatar').innerText = document.getElementById('avatarIcon').innerText;
+function generateQuestion() {
+    const q = questionBank[currentQuestion - 1];
+    selectedOption = null;
+    document.getElementById('progressText').innerText = `SOAL ${currentQuestion} DARI ${TOTAL_QUESTIONS}`;
+    document.getElementById('questionText').innerText = q.text;
+    
+    // PENANGANAN PENAMPILAN GAMBAR SOAL
+    const imgElem = document.getElementById('questionImage');
+    if (q.image && q.image.trim() !== "") {
+        imgElem.src = q.image;
+        imgElem.style.display = "block";
+    } else {
+        imgElem.style.display = "none";
+        imgElem.src = "";
+    }
+    
+    const optionsContainer = document.getElementById('optionsContainer');
+    optionsContainer.innerHTML = '';
+    
+    if (q.type === "multiple") {
+        optionsContainer.style.display = "grid";
+        q.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'option-btn';
+            btn.innerText = opt;
+            btn.onclick = () => selectOption(btn, opt);
+            optionsContainer.appendChild(btn);
+        });
+    } else if (q.type === "matching") {
+        optionsContainer.style.display = "block";
+        const wrapper = document.createElement('div');
+        wrapper.className = 'matching-container';
+        
+        const englishAnswers = [...q.pairs.map(pair => pair.english), q.distractor].sort(() => Math.random() - 0.5);
+        
+        q.pairs.forEach(pair => {
+            const row = document.createElement('div');
+            row.className = 'matching-row';
+            const indonesia = document.createElement('div');
+            indonesia.className = 'matching-indonesia';
+            indonesia.innerText = pair.indonesia;
+            
+            const select = document.createElement('select');
+            select.className = 'matching-select';
+            select.dataset.answer = pair.english;
+            
+            const defaultOption = document.createElement('option');
+            defaultOption.value = ""; defaultOption.innerText = "-- Pilih Jawaban --";
+            select.appendChild(defaultOption);
+            
+            englishAnswers.forEach(answer => {
+                const option = document.createElement('option');
+                option.value = answer; option.innerText = answer;
+                select.appendChild(option);
+            });
+            select.addEventListener('change', checkMatchingComplete);
+            
+            row.appendChild(indonesia);
+            row.appendChild(select);
+            wrapper.appendChild(row);
+        });
+        optionsContainer.appendChild(wrapper);
+    }
+    document.getElementById('submitBtn').disabled = true;
+}
 
-            const accuracy = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
-            document.getElementById('resultDetails').innerHTML = `
-                Siswa: <b>${selectedStudentName}</b><br>
-                Jawaban Benar: <b>${correctCount} / ${TOTAL_QUESTIONS}</b><br>
-                Akurasi: <b>${accuracy}%</b>
-            `;
+function selectOption(btnElem, value) {
+    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    btnElem.classList.add('selected');
+    selectedOption = value;
+    document.getElementById('submitBtn').disabled = false;
+}
 
-            await saveScoreToSheet(selectedStudentName, score);
+function checkMatchingComplete() {
+    const selects = document.querySelectorAll('.matching-select');
+    let complete = true;
+    let selectedValues = [];
+    selects.forEach(select => {
+        if (select.value === "") complete = false;
+        if (select.value !== "") selectedValues.push(select.value);
+    });
+    const hasDuplicate = new Set(selectedValues).size !== selectedValues.length;
+    document.getElementById('submitBtn').disabled = !complete || hasDuplicate;
+}
+
+function checkAnswer(event) {
+    event.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    const feedback = document.getElementById('feedbackText');
+    const gameCard = document.getElementById('gameCard');
+    const currentQ = questionBank[currentQuestion - 1];
+    
+    submitBtn.disabled = true;
+    let isCorrect = false;
+    
+    if (currentQ.type === "multiple") {
+        if (!selectedOption) return;
+        document.querySelectorAll('.option-btn').forEach(b => b.style.pointerEvents = 'none');
+        isCorrect = selectedOption === currentQ.answer;
+    } else if (currentQ.type === "matching") {
+        const selects = document.querySelectorAll('.matching-select');
+        isCorrect = true;
+        selects.forEach(select => {
+            if (select.value !== select.dataset.answer) isCorrect = false;
+            select.disabled = true;
+        });
+    }
+    
+    if (isCorrect) {
+        score += POINTS_PER_QUESTION;
+        correctCount += 1;
+        playSound('correct');
+        triggerCelebration();
+        feedback.innerText = "✨ Hebat! Jawabanmu benar!";
+        feedback.className = "feedback correct";
+    } else {
+        playSound('wrong');
+        feedback.innerText = "🌷 Ooo! Jawaban kurang tepat!";
+        feedback.className = "feedback wrong";
+        gameCard.classList.add('shake');
+        setTimeout(() => gameCard.classList.remove('shake'), 400);
+    }
+    
+    document.getElementById('score').innerText = score;
+    updateAvatar();
+    
+    setTimeout(() => {
+        feedback.innerText = "";
+        if (currentQuestion < TOTAL_QUESTIONS) {
+            currentQuestion++;
+            generateQuestion();
+        } else {
+            showFinalResult();
         }
+    }, 1400);
+}
 
-        async function saveScoreToSheet(name, scoreValue) {
-            const statusElem = document.getElementById('savingStatus');
-            try {
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    // Mengirimkan quizType "penjumlahan_5_angka" agar skor masuk ke Kolom G
-                    body: JSON.stringify({ name: name, score: scoreValue, quizType: "penjumlahan_5_angka" })
-                });
+function updateAvatar() {
+    const avatarElem = document.getElementById('avatarIcon');
+    if (correctCount < 4) avatarElem.innerText = avatars[0];
+    else if (correctCount < 8) avatarElem.innerText = avatars[1];
+    else if (correctCount < 12) avatarElem.innerText = avatars[2];
+    else if (correctCount < 16) avatarElem.innerText = avatars[3];
+    else if (correctCount < 19) avatarElem.innerText = avatars[4];
+    else avatarElem.innerText = avatars[6];
+}
 
-                statusElem.innerText = "✅ Skor berhasil disimpan ke Google Sheets (Kolom G)!";
-                statusElem.style.color = "#34d399";
-            } catch (err) {
-                console.error(err);
-                statusElem.innerText = "⚠️ Gagal menyimpan skor otomatis.";
-                statusElem.style.color = "#f43f5e";
-            }
-        }
+async function showFinalResult() {
+    document.getElementById('quizScreen').classList.remove('active-screen');
+    document.getElementById('resultScreen').classList.add('active-screen');
+    document.getElementById('finalScore').innerText = score;
+    document.getElementById('finalAvatar').innerText = document.getElementById('avatarIcon').innerText;
+    triggerCelebration();
+    
+    const accuracy = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
+    document.getElementById('resultDetails').innerHTML = `Siswa: <b>${selectedStudentName}</b><br>Jawaban Benar: <b>${correctCount} / ${TOTAL_QUESTIONS}</b><br>Akurasi: <b>${accuracy}%</b>`;
+    await saveScoreToSheet(selectedStudentName, score);
+}
 
-        window.onload = () => {
-            createStars();
-            fetchStudentNames();
-        };
-    </script>
+async function saveScoreToSheet(name, scoreValue) {
+    const statusElem = document.getElementById('savingStatus');
+    try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name, score: scoreValue })
+        });
+        statusElem.innerText = "✅ Skor berhasil disimpan!";
+        statusElem.style.color = "#2e7d32";
+    } catch (err) {
+        console.error(err);
+        statusElem.innerText = "⚠️ Gagal menyimpan skor otomatis.";
+        statusElem.style.color = "#c62828";
+    }
+}
+
+/* ANIMASI HEWAN / UNTA MELEWAT */
+const animalsDatabase = [
+    { icon: '🐪', motion: 'limb-walk' },
+    { icon: '🐫', motion: 'limb-walk' },
+    { icon: '🦜', motion: 'wing-flap' },
+    { icon: '🦅', motion: 'wing-flap' },
+    { icon: '🦚', motion: 'limb-walk' }
+];
+
+const directions = ['left-right', 'right-left', 'top-bottom'];
+
+function spawnRandomAnimal() {
+    const wrapper = document.getElementById('animalWrapper');
+    const animalElem = document.getElementById('walkingAnimal');
+    if (!wrapper || !animalElem) return;
+
+    wrapper.className = 'walking-animal-wrapper';
+    animalElem.className = 'walking-animal';
+    wrapper.style.top = ''; wrapper.style.left = '';
+
+    const randomAnimal = animalsDatabase[Math.floor(Math.random() * animalsDatabase.length)];
+    const randomDir = directions[Math.floor(Math.random() * directions.length)];
+    
+    animalElem.innerText = randomAnimal.icon;
+    animalElem.classList.add(randomAnimal.motion);
+
+    if (randomDir === 'left-right' || randomDir === 'right-left') {
+        const randomTop = Math.floor(Math.random() * 45) + 15;
+        wrapper.style.top = `${randomTop}vh`;
+        wrapper.classList.add(`animate-${randomDir}`);
+    } else if (randomDir === 'top-bottom') {
+        const randomLeft = Math.floor(Math.random() * 40) + 30;
+        wrapper.style.left = `${randomLeft}vw`;
+        wrapper.classList.add('animate-top-bottom');
+    }
+
+    const duration = (Math.random() * 2 + 3.5).toFixed(1);
+    wrapper.style.animationDuration = `${duration}s`;
+
+    setTimeout(() => {
+        wrapper.className = 'walking-animal-wrapper';
+        animalElem.className = 'walking-animal';
+        const nextDelay = Math.floor(Math.random() * (9000 - 3500 + 1)) + 3500;
+        setTimeout(spawnRandomAnimal, nextDelay);
+    }, duration * 1000);
+}
+
+window.onload = () => {
+    renderVocabulary();
+    renderPrintQuestions();
+    fetchStudentNames();
+    setTimeout(spawnRandomAnimal, 2000);
+};
+</script>
+
 </body>
 </html>
